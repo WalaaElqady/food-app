@@ -1,0 +1,50 @@
+.dialog-container {
+    width: 400px;
+    padding: 20px;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    border-radius: 5px;
+  }
+  
+  .mat-mdc-form-field-focus-overlay {
+    background: transparent !important;
+  }
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+  
+  button {
+    height: 40px;
+    font-weight: bold;
+    padding: 0 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+  
+  .save-button {
+    background-color: #008000 !important;
+    color: white !important;
+  }
+  
+  

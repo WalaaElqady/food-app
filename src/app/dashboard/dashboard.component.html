@@ -1,0 +1,14 @@
+<div class="container-fluid p-0 overflow-hidden">
+    <div class="row">
+        <div [class.collapsed]="isSidebarCollapsed" class="sidebar-wrapper">
+            <app-sidebar (toggle)="toggleSidebar()"
+            [isCollapsed]="isSidebarCollapsed"></app-sidebar>
+        </div>
+        <div [class.expanded]="isSidebarCollapsed" class="content-wrapper">
+            <app-navbar></app-navbar>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,294 @@
+<section>
+  <div class="container">
+    <div class="row min-vh-100 justify-content-center align-items-center">
+      <div class="col-lg-10">
+        <div class="auth-form py-2">
+          <div class="logo w-50 m-auto mt-0 mb-3"
+            [class.w-100]="isSmallScreen"
+            [class.w-50]="!isSmallScreen"
+          >
+            <img
+              class="w-100"
+              src="../../../../assets/images/4 4.svg"
+              alt="Logo"
+            />
+          </div>
+          <div class="title">
+            <h2>Register</h2>
+            <p>Welcome Back! Please enter your details</p>
+          </div>
+          <form
+            class="form-container"
+            [formGroup]="registerForm"
+            (ngSubmit)="sendData(registerForm)"
+          >
+            <div class="row justify-content-between">
+              <div class="image-upload-wrapper">
+                <ngx-file-drop
+                  (onFileDrop)="dropped($event)"
+                  accept="image/*"
+                  [multiple]="false"
+                  dropZoneLabel=""
+                  dropZoneClassName="hidden-dropzone"
+                  [showBrowseBtn]="true"
+                  browseBtnClassName="custom-browse-btn"
+                >
+                  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    <div class="upload-area" (click)="openFileSelector()">
+                      <ng-container *ngIf="!imagePreview">
+                        <p class="mt-2">Upload Image</p>
+                      </ng-container>
+              
+                      <ng-container *ngIf="imagePreview">
+                        <div class="image-container">
+                          <img [src]="imagePreview" alt="Preview" class="img-preview">
+                          <!-- <button (click)="deleteImage()">Delete Image</button> -->
+                          <i class="fa fa-close delete-icon" *ngIf="imagePreview" (click)="deleteImage()"></i>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                </ngx-file-drop>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-user"></i
+                    ></span>
+                    <input
+                      type="text"
+                      formControlName="userName"
+                      class="form-control input-form"
+                      placeholder="UserName"
+                      aria-label="UserName"
+                    />
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="
+                      registerForm?.get('userName')?.invalid &&
+                      registerForm?.get('userName')?.touched
+                    "
+                  >
+                    <span
+                      *ngIf="registerForm?.get('userName')?.errors?.['required']; else minlengthError"
+                    >
+                      UserName is required.
+                    </span>
+                    <ng-template #minlengthError>
+                      <span
+                        *ngIf="registerForm?.get('userName')?.errors?.['minlength']; else maxlengthError"
+                      >
+                        UserName must be at least 3 characters.
+                      </span>
+                    </ng-template>
+                    <ng-template #maxlengthError>
+                      <span
+                        *ngIf="registerForm?.get('userName')?.errors?.['maxlength']; else patternError"
+                      >
+                      The userName may not be greater than 8 characters.
+                    </span>
+                    </ng-template>
+                    <ng-template #patternError>
+                      <span
+                        *ngIf="registerForm?.get('userName')?.errors?.['pattern']"
+                      >
+                        The userName must contain characters and end with
+                        numbers without spaces.
+                      </span>
+                    </ng-template>
+                  </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-earth-americas"></i
+                    ></span>
+                    <input
+                      type="text"
+                      formControlName="country"
+                      class="form-control input-form"
+                      placeholder="Country"
+                      aria-label="Country"
+                    />
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="
+                      registerForm?.get('country')?.invalid &&
+                      registerForm?.get('country')?.touched
+                    "
+                  >
+                    <span
+                      *ngIf="registerForm?.get('country')?.errors?.['required']"
+                    >
+                      Country is required.
+                    </span>
+                  </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-lock"></i
+                    ></span>
+                    <input
+                      [type]="isPasswordHidden ? 'password' : 'text'"
+                      formControlName="password"
+                      class="form-control input-form"
+                      placeholder="Password"
+                    />
+                    <a (click)="isPasswordHidden = !isPasswordHidden">
+                      <span class="input-group-text eye-icon">
+                        <i
+                          class="fa-solid"
+                          [class]="isPasswordHidden ? 'fa-eye-slash' : 'fa-eye'"
+                        ></i>
+                      </span>
+                    </a>
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="registerForm?.get('password')?.touched"
+                  >
+                    <span
+                      *ngIf="registerForm?.get('password')?.errors?.['required']; else checkMinLength"
+                    >
+                      Password is required.
+                    </span>
+                    <ng-template #checkMinLength>
+                      <span
+                        *ngIf="registerForm?.get('password')?.errors?.['minlength']; else checkPattern"
+                      >
+                        Password must be at least 6 characters.
+                      </span>
+                    </ng-template>
+                    <ng-template #checkPattern>
+                      <span
+                        *ngIf="registerForm?.get('password')?.errors?.['pattern']"
+                      >
+                        The password must include at least one lowercase letter,
+                        one uppercase letter, one digit, and one special
+                        character.
+                      </span>
+                    </ng-template>
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-envelope"></i
+                    ></span>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control input-form"
+                      placeholder="Enter your E-mail"
+                      aria-label="email"
+                    />
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="
+                      registerForm?.get('email')?.invalid &&
+                      registerForm?.get('email')?.touched
+                    "
+                  >
+                    <span
+                      *ngIf="registerForm?.get('email')?.errors?.['required']"
+                      >Email is required.</span
+                    >
+                    <span *ngIf="registerForm?.get('email')?.errors?.['email']"
+                      >Enter a valid email.</span
+                    >
+                  </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-phone"></i
+                    ></span>
+                    <input
+                      type="text"
+                      formControlName="phoneNumber"
+                      class="form-control input-form"
+                      placeholder="PhoneNumber"
+                      aria-label="PhoneNumber"
+                    />
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="
+                      registerForm?.get('phoneNumber')?.invalid &&
+                      registerForm?.get('phoneNumber')?.touched
+                    "
+                  >
+                    <span
+                      *ngIf="registerForm?.get('phoneNumber')?.errors?.['required']"
+                    >
+                      Phone number is required.
+                    </span>
+                  </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                  <div class="input-group">
+                    <span class="input-group-text icon-style border-0"
+                      ><i class="fa-solid fa-lock"></i
+                    ></span>
+                    <input
+                      [type]="isConfirmPasswordHidden ? 'password' : 'text'"
+                      formControlName="confirmPassword"
+                      class="form-control input-form"
+                      placeholder="Confirm Password"
+                    />
+                    <a (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden">
+                      <span class="input-group-text eye-icon">
+                        <i
+                          class="fa-solid"
+                          [class]="isConfirmPasswordHidden ? 'fa-eye-slash' : 'fa-eye'"
+                        ></i>
+                      </span>
+                    </a>
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    *ngIf="registerForm?.get('confirmPassword')?.touched"
+                  >
+                    <span
+                      *ngIf="registerForm?.get('confirmPassword')?.errors?.['required']; else mismatchError"
+                    >
+                      Confirm Password is required.
+                    </span>
+                    <ng-template #mismatchError>
+                      <span *ngIf="registerForm?.errors?.['mismatch']">
+                        Passwords do not match.
+                      </span>
+                    </ng-template>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mb-3">
+              <a routerLink="/auth" class="second-link">Login Now?</a>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="primary-color w-50"
+                [disabled]="registerForm.invalid"
+                [ngStyle]="{
+                  'pointer-events': registerForm.invalid ? 'none' : 'auto'
+                }"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

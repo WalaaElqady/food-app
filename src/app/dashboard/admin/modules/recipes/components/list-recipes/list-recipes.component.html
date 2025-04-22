@@ -1,0 +1,178 @@
+<section class="categories px-3">
+
+    <div class="page-title container-fluid">
+            <div class="row ">
+                <div class="col-md-8 p-5">
+                    <h1 class="ms-3">Recipes
+                        <span>Item</span>
+                    </h1>
+                    <p class="ms-5">You can now add your items that any user can order <br> it from the Application and you can edit</p>
+                </div>
+                <div class="col-md-4  mt-3 recipe-img">
+                    <img  src="../../../../../../../assets/images/eating-avatar.svg" alt="">
+                </div>
+            </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+                <div class="middle col-md-11 ">
+                    <div class="d-flex align-content-center justify-content-between my-3">
+                        <p>Recipes Table Details <br>
+                            <span>
+                                You can check all details
+                            </span>
+                        </p>
+                        <button routerLink="addRecipe">Add New Recipe</button>
+                    </div>
+                </div>            
+        </div>
+    </div>
+    
+    <div class="filter-container">
+      <mat-form-field class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput placeholder="Search here ..." [(ngModel)]="searchQuery" (keyup)="onSearchInputChange()" />
+      </mat-form-field>
+
+      <mat-form-field class="dropdown-field">
+        <mat-select placeholder="Tag" [(ngModel)]="tableQueryParams.tagId" (selectionChange)="getRecipesData()">
+          <mat-option *ngFor="let tag of tagList" [value]="tag.id">
+            {{ tag.name }}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="dropdown-field">
+        <mat-select placeholder="category" [(ngModel)]="tableQueryParams.categoryId" (selectionChange)="getRecipesData()">
+          <mat-option *ngFor="let category of categoryList" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="warn" (click)="clearFilters()">Clear Filters</button>
+
+
+
+    
+    </div> 
+    <div *ngIf="recipesList.length === 0" class="my-3 no-data-container d-flex align-items-center justify-content-center">
+      <img src="../../../../../../../assets/images/no-data.png" alt="No Data Available" class=" no-data-image">
+    </div>
+    <div class="d-none d-lg-block">
+      <table *ngIf="recipesList.length > 0" class="w-100 table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Tag</th>
+            <th>Category</th>
+            <th>C.Date</th>
+            <th>M.Date</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+          
+            <tr *ngFor="let recipe of recipesList">
+                <td>{{ recipe.name }}</td>
+                <!-- <td>
+                  <img [src]="getRecipeImage(recipe.imagePath)" alt="User Image" class="avatar">
+                </td> -->
+                <td>
+                  <img [src]="getRecipeImage(recipe.imagePath)" alt="Recipe Image" width="80" height="80" />
+                </td>
+                <td>{{ recipe.description }}</td>
+                <td>{{ recipe.price }}</td>
+                <td>{{ recipe.tag?.name }}</td>
+
+                <td>
+                  <ng-container *ngFor="let category of recipe.category ?? []; let i = index">
+                    {{ category.name + '' }}<span *ngIf="i < (recipe.category?.length ?? 0) - 1"> , </span>
+                  </ng-container>
+                </td>
+
+                <td>{{ recipe.creationDate | date: 'dd/MM/yyyy hh:mm a' }}</td>
+                <td>{{ recipe.modificationDate | date: 'dd/MM/yyyy hh:mm a' }}</td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button  mat-menu-item [routerLink]="['editRecipe' , recipe.id]">
+                          <mat-icon class="text-success">edit_square</mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button mat-menu-item [routerLink]="['viewRecipe' , recipe.id, true]">
+                          <mat-icon class="text-success">visibility</mat-icon>
+                          <span>View</span>
+                        </button>
+                        <button (click)="openDeleteDialog(recipe)" mat-menu-item >
+                          <mat-icon  class="text-danger">delete</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                      
+                </td>
+            </tr>
+
+        </tbody>
+            
+    </table>
+    </div>
+    <div class="d-block d-lg-none">
+      <div *ngFor="let recipe of recipesList" class="card my-2 p-3 shadow-sm recipe-card">
+        <div class="d-flex align-items-center">
+          <img [src]="getRecipeImage(recipe.imagePath)" alt="Recipe Image" class="me-2 rounded-3" width="50" height="50">
+          <div>
+            <h6 class="mb-0">{{ recipe.name }}</h6>
+            <small class="text-muted">Price: {{ recipe.price }}$</small>
+          </div>
+          <div class="ms-auto">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More options">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['editRecipe', recipe.id]">
+                <mat-icon class="text-success">edit_square</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item [routerLink]="['viewRecipe', recipe.id, true]">
+                <mat-icon class="text-success">visibility</mat-icon>
+                <span>View</span>
+              </button>
+              <button (click)="openDeleteDialog(recipe)" mat-menu-item>
+                <mat-icon class="text-danger">delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+    
+        <div class="mt-2">
+          <p><strong>Description:</strong> {{ recipe.description }}</p>
+          <p><strong>Tag:</strong> {{ recipe.tag?.name }}</p>
+          <p><strong>Category:</strong>
+            <ng-container *ngFor="let category of recipe.category; let i = index">
+              {{ category.name }}<span *ngIf="i < (recipe.category?.length ?? 0) - 1"> , </span>
+            </ng-container>
+          </p>
+          <p><strong>Creation Date:</strong> {{ recipe.creationDate | date: 'dd/MM/yyyy hh:mm a' }}</p>
+          <p><strong>Modification Date:</strong> {{ recipe.modificationDate | date: 'dd/MM/yyyy hh:mm a' }}</p>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    
+    <mat-paginator
+    *ngIf="recipesList.length > 0"
+    (page)="handlePageEvents($event)"
+    [pageIndex]="tableQueryParams.pageNumber -1"
+    [length]="tableRes?.totalNumberOfRecords"
+    [pageSize]="tableQueryParams.pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20, 25]"
+    aria-label="Select page">
+</mat-paginator>
+</section>

@@ -1,0 +1,80 @@
+<section class="categories px-3">
+    <div class="page-title container-fluid">
+        <div class="row">
+            <div class="col-md-8 p-5">
+                <h1 class="ms-3">Favorites
+                    <span>Item</span>
+                </h1>
+                <p class="ms-5">You can now add your items that any user can order <br> 
+                    it from the Application and you can edit</p>
+            </div>
+            <div class="col-md-4 mt-3 recipe-img">
+                <img src="../../../../../../../assets/images/eating-avatar.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="middle col-md-11 ">
+                <div class="d-flex align-content-center justify-content-between my-3">
+                    <p>Favorite Recipes Details <br>
+                        <span>You can check all details</span>
+                    </p>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div *ngIf="favList.length === 0" class="mb-3 no-data-container d-flex align-items-center justify-content-center">
+        <img src="../../../../../../../assets/images/no-data.png" alt="No Data Available" class="no-data-image">
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4" *ngFor="let fav of favList">
+                <div class="card shadow-sm position-relative">
+                    <img [src]="fav.recipe.imagePath ? 'https://upskilling-egypt.com:3006/' + fav.recipe.imagePath : defaultImage"
+                    class="w-100 card-img-top" alt="{{ fav.recipe.name }}'">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ fav.recipe.name }}</h5>
+                        <i class="fa fa-heart text-danger position-absolute"
+                        style="top: 10px; right: 10px; font-size: 20px; cursor: pointer;" 
+                        (click)="removeFav(fav?.id)"></i>
+                        <p class="card-text">{{ fav.recipe.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="filter-container">
+        <mat-form-field class="search-field">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput placeholder="Search here ..." [(ngModel)]="searchQuery" (keyup)="onSearchInputChange()" />
+        </mat-form-field>
+
+        <mat-form-field class="dropdown-field">
+            <mat-select placeholder="Tag" [(ngModel)]="tableQueryParams.tagId" (selectionChange)="getRecipesData()">
+                <mat-option *ngFor="let tag of tagList" [value]="tag.id">
+                    {{ tag.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="dropdown-field">
+            <mat-select placeholder="Category" [(ngModel)]="tableQueryParams.categoryId" (selectionChange)="getRecipesData()">
+                <mat-option *ngFor="let category of categoryList" [value]="category.id">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>  -->
+    <!-- <mat-paginator
+        *ngIf="recipesList.length > 0"
+        (page)="handlePageEvents($event)"
+        [pageIndex]="tableQueryParams.pageNumber -1"
+        [length]="tableRes?.totalNumberOfRecords"
+        [pageSize]="tableQueryParams.pageSize"
+        [pageSizeOptions]="[5, 10, 15, 20, 25]"
+        aria-label="Select page">
+    </mat-paginator> -->
+</section>

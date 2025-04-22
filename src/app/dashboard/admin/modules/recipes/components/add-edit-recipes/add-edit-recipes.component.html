@@ -1,0 +1,99 @@
+<section class="w-75 m-auto mt-3">
+  <div class="container">
+    <h1>{{ pageTitle }}</h1>
+    <form [formGroup]="recipesForm" (ngSubmit)="sendData(recipesForm)">
+      <div class="input-form mb-3 p-2">
+        <div class="input-group ">
+          <input type="text" formControlName="name" class="form-control input-form" placeholder="Recipe Name"
+            aria-label="name" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="input-form mb-3 p-2">
+        <label for="tag" class="form-label">Tag</label>
+        <select formControlName="tagId" class="form-select" id="tag">
+          <option *ngFor="let tag of tagList" [value]="tag.id">
+            {{ tag.name }}
+          </option>
+        </select>
+      </div>
+      <div class="input-form mb-3 p-2">
+        <div class="input-group">
+          <input type="number" formControlName="price" class="form-control input-form me-1" placeholder="350.99"
+            aria-label="price" aria-describedby="basic-addon1">
+          <span class="mt-1">EGP</span>
+
+
+        </div>
+      </div>
+      <div class="input-form mb-3 p-2">
+        <mat-form-field appearance="outline" class="custom-border w-100">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoriesIds" multiple>
+            <mat-option *ngFor="let category of categoryList" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="input-form mb-3 p-2">
+        <div class="input-group">
+          <label for="description" class="form-label"></label>
+          <textarea formControlName="description" class="form-control" id="description" rows="3"
+            placeholder="Description">
+
+      </textarea>
+        </div>
+      </div>
+      <div class="input-form mb-3 p-2">
+        <!-- <ngx-file-drop (onFileDrop)="dropped($event)" accept="image/*" [multiple]="false"
+          dropZoneClassName="custom-drop-zone" [showBrowseBtn]="false">
+          <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            <div class="upload-box" (click)="openFileSelector()">
+              <i class="fa fa-upload upload-icon"></i>
+              <p>
+                Drag & Drop or
+                <span class="choose-text" (click)="openFileSelector(); $event.stopPropagation()">Choose a Item
+                  Image</span>
+                to Upload
+              </p>
+            </div>
+          </ng-template>
+        </ngx-file-drop> -->
+        <ngx-file-drop
+        (onFileDrop)="dropped($event)"
+        accept="image/*"
+        [multiple]="false"
+        dropZoneClassName="custom-drop-zone"
+        [showBrowseBtn]="false"
+      >
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          <div class="upload-box" (click)="openFileSelector()">
+            <i class="fa fa-upload upload-icon" *ngIf="!imagePreview"></i>
+            <p *ngIf="!imagePreview">
+              Drag & Drop or 
+              <span class="choose-text" (click)="openFileSelector(); $event.stopPropagation()">Choose a Item Image</span>
+              to Upload
+            </p>
+      
+            <div class="preview-wrapper" *ngIf="imagePreview">
+              <img [src]="imagePreview" alt="Preview" class="preview-image">
+              <i class="fa fa-times delete-icon" (click)="deleteImage()"></i>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-file-drop>
+      
+      </div>
+      <div class="d-flex justify-content-end gap-2 mt-3">
+        <button (click)="cancel()" type="button" class="save btn btn-outline-secondary px-4">Cancel
+        </button>
+        <button *ngIf="!isViewMode" type="submit" class="cancel btn btn-success px-4" [disabled]="recipesForm.invalid"
+          [ngStyle]="{
+                  'pointer-events': recipesForm.invalid ? 'none' : 'auto'
+                }">
+          {{ buttonText }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

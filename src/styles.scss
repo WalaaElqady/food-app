@@ -1,1 +1,148 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$food-app-primary: mat.define-palette(mat.$indigo-palette);
+$food-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$food-app-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$food-app-theme: mat.define-light-theme((
+  color: (
+    primary: $food-app-primary,
+    accent: $food-app-accent,
+    warn: $food-app-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($food-app-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+$main-color: #4aa35a;
+.auth-form{
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 16px;
+    margin: 0 2rem;
+}
+.form-control{
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+}
+input.form-control:focus {
+    border: none;
+    box-shadow:0 0 10px rgb(74, 163, 90) ;
+}
+label.form-label:focus {
+    border: none;
+    box-shadow:0 0 10px rgb(74, 163, 90) ;
+}
+select.form-select:focus {
+    border: none;
+    box-shadow:0 0 10px rgb(74, 163, 90) ;
+}
+textarea.form-control:focus {
+    border: none;
+    box-shadow:0 0 10px rgb(74, 163, 90) ;
+}
+
+h2{
+    color: #494949;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30.26px;
+    letter-spacing: 0%;
+}
+p{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.36px;
+    letter-spacing: 0%;
+    color: #49494999;
+}
+.input-form{
+    background-color: #F7F7F7;
+    border-radius: 8px;
+}
+.eye-icon , .icon-style{
+    color: #8391A1;
+    font-weight: 457 !important;
+    font-size: 21px;
+    line-height: 26.25px;
+    letter-spacing: 0%;
+}
+.eye-icon{
+    border: none;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: #3a3a3d;
+    &.first-link{
+        color: #3A3A3D;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19.36px;
+        letter-spacing: 0%;
+
+    }
+    &.second-link{
+        color: $main-color;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19.36px;
+        letter-spacing: 0%;
+    }
+    
+}
+button{
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24.2px;
+    letter-spacing: 0%;
+    text-align: center;
+
+    &.primary-color{
+        background-color: #4aa35a;
+        color: #fff;
+        text-align: center;
+        &:hover{
+            opacity: 0.7;
+        }
+}
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

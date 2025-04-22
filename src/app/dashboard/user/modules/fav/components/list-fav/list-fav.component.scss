@@ -1,0 +1,129 @@
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 250px;
+    // width: 250px;
+    object-fit: fill;
+}
+
+.card-body p {
+    margin-bottom: 5px;
+}
+
+.d-flex.justify-content-between {
+    margin-top: 10px;
+}
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: chocolate;
+}
+.page-title{
+    background-image: url('../../../../../../../assets/images/header-bg-svg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 15px;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #009247;
+
+    h1{
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 46.88px;
+        letter-spacing: 0%;
+        color: #FFFFFF;
+        span{
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 37.5px;
+            letter-spacing: 0%;
+            color: #DFE0E0;
+        }
+    }
+    p{
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 4%;
+        color: #FFFFFF;
+    }
+    @media screen and (max-width: 768px) {
+        .recipe-img{
+            display: none;
+        }
+        
+    }
+
+}
+.middle{
+    // background-color: chartreuse;
+    width: 100%;
+    
+   p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0%;
+    color: #1F263E;
+    span{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        // line-height: 21px;
+        letter-spacing: 0%;
+        color: #323C47;
+    }
+   }
+   button{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19.36px;
+    letter-spacing: 0%;
+    text-align: center;
+    background-color: #009247;
+    border-radius: 8px;
+    color: #FFFFFF;
+
+   }
+}
+table{
+    width: 95%;
+   }
+   .filter-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .search-field {
+    flex: 1;
+    min-width: 200px;
+  }  
+  .dropdown-field {
+    width: 200px;
+  }
+  
+  @media (max-width: 900px) {
+    .dropdown-field {
+      width: 100%;
+    }
+  }

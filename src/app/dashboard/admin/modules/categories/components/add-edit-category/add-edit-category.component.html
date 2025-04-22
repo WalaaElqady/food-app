@@ -1,0 +1,20 @@
+
+      <mat-dialog-content class="dialog-container">
+        <div class="header">
+          <h2>Add Category</h2>
+          <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Category Name</mat-label>
+          <input [disabled]="data.isReadOnly" matInput [(ngModel)]="data.name" name="categoryName">
+        </mat-form-field>
+      </mat-dialog-content>
+      
+      <mat-dialog-actions align-end>
+        <button *ngIf="!data.isReadOnly" mat-flat-button color="primary" class="save-button"
+        (click)="closeDialog()" [mat-dialog-close]="data">Save</button>
+      </mat-dialog-actions>
+      

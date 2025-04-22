@@ -1,0 +1,79 @@
+
+<section class="categories px-3">
+
+    <div class="page-title container-fluid">
+            <div class="row ">
+                <div class="col-md-8 p-5">
+                    <h1 class="ms-3">Categories
+                        <span>Item</span>
+                    </h1>
+                    <p class="ms-5">You can now add your items that any user can order <br> it from the Application and you can edit</p>
+                </div>
+                <div class="col-md-4  mt-3 category-img">
+                    <img  src="../../../../../../../assets/images/eating-avatar.svg" alt="">
+                </div>
+            </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+                <div class="middle col-md-11 ">
+                    <div class=" d-flex align-content-center justify-content-between my-3">
+                        <p>Categories Table Details <br>
+                            <span>
+                                You can check all details
+                            </span>
+                        </p>
+                        <button  (click)="openAddCategoryDialog()" >Add New Category</button>
+                    </div>
+                </div>            
+        </div>
+    </div>
+    
+    <table class="w-100 table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>C.Date</th>
+            <th>M.Date</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categoriesList">
+                <td>{{ category.name }}</td>
+                <td>{{ category.creationDate | date: 'dd/MM/yyyy hh:mm a' }}</td>
+                <td>{{ category.modificationDate | date: 'dd/MM/yyyy hh:mm a' }}</td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button (click)="openEditCategoryDialog(category)" mat-menu-item>
+                          <mat-icon class="text-success">edit_square</mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button (click)="openViewCategoryDialog(category)" mat-menu-item>
+                          <mat-icon class="text-success">visibility</mat-icon>
+                          <span>View</span>
+                        </button>
+                        <button mat-menu-item (click)="openDeleteDialog(category)">
+                          <mat-icon class="text-danger">delete</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                      
+                </td>
+            </tr>
+
+        </tbody>
+            
+    </table>
+    
+    <mat-paginator
+    (page)="handlePageEvents($event)"
+    [pageIndex]="tableParams.pageNumber-1"
+    [length]="tableRes?.totalNumberOfRecords"
+    [pageSize]="tableParams.pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20, 25]"
+    aria-label="Select page">
+</mat-paginator>
+</section>

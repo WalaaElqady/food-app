@@ -1,0 +1,35 @@
+<mat-dialog-content class="dialog-container text-center">
+    <div class="header mb-2">
+      <h2>Recipe Details</h2>
+      <button class="close-btn" mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  
+    <img [src]="data.imagePath ? 'https://upskilling-egypt.com:3006/' + data.imagePath : defaultImage"
+         class="w-50 rounded" alt="Recipe Image">
+         <h2>{{ data.name }}</h2>
+  
+    <p >{{ data.description }}</p>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions  align="end">
+    <button (click)="addToFav(data.id)" class="fav-btn" mat-button>Add To Fav</button>
+  </mat-dialog-actions>
+  
+
+  <!-- <div class="dialog-container">
+    <button class="close-btn" (click)="onClose()">
+      ❌
+    </button>
+  
+    <img [src]="data.imagePath ? 'https://upskilling-egypt.com:3006/' + data.imagePath : defaultImage"
+    class="w-100 rounded" alt="Recipe Image"> 
+    <h2>{{data.name}}</h2>
+    <p>{{data.description}}</p>
+  
+    <mat-dialog-actions align="end">
+        <button [mat-dialog-close]="data" mat-button class="fav-btn" >Add To Fav</button>
+      </mat-dialog-actions>
+        </div> -->
+

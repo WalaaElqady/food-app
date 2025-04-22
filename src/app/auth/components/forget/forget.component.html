@@ -1,0 +1,37 @@
+<section>
+    <div class="container">
+        <div class="row vh-100 justify-content-center align-items-center">
+            <div class="col-lg-6">
+                <div class="auth-form px-5"> 
+                    <div class="logo w-75 m-auto">
+                        <img class="w-100 mb-5" src="../../assets/images/4 4.svg" alt="">
+                    </div>
+                    <div class="title mb-5">
+                        <h2>Forget Your Password?</h2>
+                        <p>No worries! Please enter your email and we will send a password reset link </p>
+                    </div>
+                    <form class="mb-5" [formGroup]="forgetPasswordForm" (ngSubmit)="sendData()">
+                        <div class="input-form p-2">
+                            <div class="input-group">
+                                <span class="input-group-text icon-style border-0" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" formControlName="email"
+                                class="form-control input-form"
+                                placeholder="Enter your email" aria-label="email"
+                                aria-describedby="basic-addon1">
+                              </div>
+                              <small class="text-danger d-block mt-1" 
+                                *ngIf="forgetPasswordForm?.get('email')?.invalid && forgetPasswordForm?.get('email')?.touched">
+                                <span *ngIf="forgetPasswordForm?.get('email')?.errors?.['required']">Email is required.</span>
+                                <span *ngIf="forgetPasswordForm?.get('email')?.errors?.['email']">Enter a valid email.</span>
+                                </small>
+                        </div>    
+                          <div>
+                            <button class="primary-color w-100 mt-5"[disabled]="forgetPasswordForm.invalid"
+                            [ngStyle]="{'pointer-events': forgetPasswordForm.invalid ? 'none' : 'auto' }">Submit</button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

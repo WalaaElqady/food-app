@@ -1,0 +1,25 @@
+<section class="sidebar h-100" [class.collapsed]="isCollapsed">
+  <div class="logo">
+      <img (click)="toggleSidebar()" class="w-100 my-5" src="../../../../assets/images/3.png" alt="logo"
+      style="cursor: pointer;">
+  </div>
+  
+  <ul class="menu">
+      <li class="my-3" *ngFor="let item of navItems; let i = index">
+          <ng-container *ngIf="item.role">
+              <div [class.active]="item.isActive" (click)="setActive(i)">
+                                <!-- for user -->
+                  <a *ngIf="!item.action" class="py-3 px-3 mx-0" [routerLink]="item.link">
+                      <span class="icon mx-2"><i [class]="item.icon"></i></span>
+                      <span *ngIf="!isCollapsed" class="icon-text">{{ item.title }}</span>
+                  </a>
+                                  <!-- for logout -->
+                  <button *ngIf="item.action" class="py-3 px-3 mx-0 logout-btn" (click)="item.action()">
+                      <span class="icon mx-2"><i [class]="item.icon"></i></span>
+                      <span *ngIf="!isCollapsed" class="icon-text">{{ item.title }}</span>
+                  </button>
+              </div>
+          </ng-container>
+      </li>
+  </ul>
+</section>

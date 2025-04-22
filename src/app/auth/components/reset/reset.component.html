@@ -1,0 +1,141 @@
+<section>
+    <div class="container">
+      <div class="row min-vh-100 justify-content-center align-items-center">
+        <div class="col-lg-7">
+          <div class="auth-form px-5">
+            <div
+              class="logo w-75 m-auto mt-0 mb-3"
+              [class.w-100]="isSmallScreen"
+              [class.w-50]="!isSmallScreen"
+            >
+              <img
+                class="w-100"
+                src="../../../../assets/images/4 4.svg"
+                alt="Logo"
+              />
+            </div>
+            <div class="title mb-3">
+              <h2>Reset Password</h2>
+              <p>Please Enter Your OTP or Check Your Inbox</p>
+            </div>
+            <form  [formGroup]="resetPasswordForm" (ngSubmit)="sendData(resetPasswordForm)">
+                <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                        <span class="input-group-text icon-style border-0" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="email" formControlName="email"
+                        class="form-control input-form"
+                        placeholder="Enter your email" aria-label="email"
+                        aria-describedby="basic-addon1">
+                      </div>
+                      <small class="text-danger d-block mt-1" 
+                        *ngIf="resetPasswordForm?.get('email')?.invalid && resetPasswordForm?.get('email')?.touched">
+                        <span *ngIf="resetPasswordForm?.get('email')?.errors?.['required']">Email is required.</span>
+                        <span *ngIf="resetPasswordForm?.get('email')?.errors?.['email']">Enter a valid email.</span>
+                        </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                        <span class="input-group-text icon-style border-0" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" formControlName="seed"
+                        class="form-control input-form"
+                        placeholder="OTP" aria-label="seed"
+                        aria-describedby="basic-addon1">
+                      </div>
+                      <small class="text-danger d-block mt-1" 
+                        *ngIf="resetPasswordForm?.get('seed')?.invalid && resetPasswordForm?.get('seed')?.touched">
+                        <span *ngIf="resetPasswordForm?.get('seed')?.errors?.['required']">otp is required.</span>
+                        </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                      <span class="input-group-text icon-style border-0"
+                        ><i class="fa-solid fa-lock"></i
+                      ></span>
+                      <input
+                        [type]="isPasswordHidden ? 'password' : 'text'"
+                        formControlName="password"
+                        class="form-control input-form"
+                        placeholder="newPassword"
+                      />
+                      <a (click)="isPasswordHidden = !isPasswordHidden">
+                        <span class="input-group-text eye-icon">
+                          <i
+                            class="fa-solid"
+                            [class]="isPasswordHidden ? 'fa-eye-slash' : 'fa-eye'"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                    <small
+                      class="text-danger d-block mt-1"
+                      *ngIf="resetPasswordForm?.get('password')?.touched"
+                    >
+                      <span
+                        *ngIf="resetPasswordForm?.get('password')?.errors?.['required']; else checkMinLength"
+                      >
+                        Password is required.
+                      </span>
+                      <ng-template #checkMinLength>
+                        <span
+                          *ngIf="resetPasswordForm?.get('password')?.errors?.['minlength']; else checkPattern"
+                        >
+                          Password must be at least 6 characters.
+                        </span>
+                      </ng-template>
+                      <ng-template #checkPattern>
+                        <span
+                          *ngIf="resetPasswordForm?.get('password')?.errors?.['pattern']"
+                        >
+                          The password must include at least one lowercase letter,
+                          one uppercase letter, one digit, and one special
+                          character.
+                        </span>
+                      </ng-template>
+                    </small>
+                  </div>
+                  <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                      <span class="input-group-text icon-style border-0"
+                        ><i class="fa-solid fa-lock"></i
+                      ></span>
+                      <input
+                        [type]="isConfirmPasswordHidden ? 'password' : 'text'"
+                        formControlName="confirmPassword"
+                        class="form-control input-form"
+                        placeholder="Confirm Password"
+                      />
+                      <a (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden">
+                        <span class="input-group-text eye-icon">
+                          <i
+                            class="fa-solid"
+                            [class]="isConfirmPasswordHidden ? 'fa-eye-slash' : 'fa-eye'"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                    <small
+                      class="text-danger d-block mt-1"
+                      *ngIf="resetPasswordForm?.get('confirmPassword')?.touched"
+                    >
+                      <span
+                        *ngIf="resetPasswordForm?.get('confirmPassword')?.errors?.['required']; else mismatchError"
+                      >
+                        Confirm Password is required.
+                      </span>
+                      <ng-template #mismatchError>
+                        <span *ngIf="resetPasswordForm?.errors?.['mismatch']">
+                          Passwords do not match.
+                        </span>
+                      </ng-template>
+                    </small>
+                  </div>
+                  <div>
+                    <button class="primary-color w-100"[disabled]="resetPasswordForm.invalid"
+                    [ngStyle]="{'pointer-events': resetPasswordForm.invalid ? 'none' : 'auto' }">Submit</button>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

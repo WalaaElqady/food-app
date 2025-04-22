@@ -1,0 +1,58 @@
+<section>
+    <div class="container">
+      <div class="row min-vh-100 justify-content-center align-items-center">
+        <div class="col-lg-7">
+          <div class="auth-form px-5">
+            <div
+              class="logo w-75 m-auto mt-0 mb-3"
+              [class.w-100]="isSmallScreen"
+              [class.w-50]="!isSmallScreen"
+            >
+              <img
+                class="w-100"
+                src="../../../../assets/images/4 4.svg"
+                alt="Logo"
+              />
+            </div>
+            <div class="title mb-3">
+              <h2>Verify Account</h2>
+              <p>Please Enter Your Otp  or Check Your Inbox</p>
+            </div>
+            <form  [formGroup]="verifyForm" (ngSubmit)="sendData(verifyForm)">
+                <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                        <span class="input-group-text icon-style border-0" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="email" formControlName="email"
+                        class="form-control input-form"
+                        placeholder="Enter your email" aria-label="email"
+                        aria-describedby="basic-addon1">
+                      </div>
+                      <small class="text-danger d-block mt-1" 
+                        *ngIf="verifyForm?.get('email')?.invalid && verifyForm?.get('email')?.touched">
+                        <span *ngIf="verifyForm?.get('email')?.errors?.['required']">Email is required.</span>
+                        <span *ngIf="verifyForm?.get('email')?.errors?.['email']">Enter a valid email.</span>
+                        </small>
+                </div>
+                <div class="input-form mb-3 p-2">
+                    <div class="input-group">
+                        <span class="input-group-text icon-style border-0" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" formControlName="code"
+                        class="form-control input-form"
+                        placeholder="OTP" aria-label="code"
+                        aria-describedby="basic-addon1">
+                      </div>
+                      <small class="text-danger d-block mt-1" 
+                        *ngIf="verifyForm?.get('code')?.invalid && verifyForm?.get('code')?.touched">
+                        <span *ngIf="verifyForm?.get('code')?.errors?.['required']">otp is required.</span>
+                        </small>
+                </div>
+               <div>
+                    <button class="primary-color w-100"[disabled]="verifyForm.invalid"
+                    [ngStyle]="{'pointer-events': verifyForm.invalid ? 'none' : 'auto' }">Submit</button>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
