@@ -16,8 +16,8 @@ export class AuthComponent {
   }
 isHide:boolean=true;
 loginForm = new FormGroup({
-  email: new FormControl('walaaatef54@gmail.com' , [Validators.required, Validators.email]),
-  password: new FormControl('test@Test2', [Validators.required , Validators.minLength(6),
+  email: new FormControl('' , [Validators.required, Validators.email]),
+  password: new FormControl('', [Validators.required , Validators.minLength(6),
     Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
    ])
 });

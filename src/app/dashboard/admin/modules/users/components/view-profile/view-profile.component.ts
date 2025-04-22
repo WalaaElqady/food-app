@@ -25,10 +25,10 @@ updateForm = new FormGroup({
   userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8),
     Validators.pattern(/^[A-Za-z]+[0-9]+$/)
   ]),
-  country: new FormControl('egypt', [Validators.required]),
+  country: new FormControl('', [Validators.required]),
   email: new FormControl('', [Validators.required, Validators.email]),
-  phoneNumber: new FormControl('01017563238', [Validators.required]),
-  confirmPassword: new FormControl('test@Test2', [Validators.required, Validators.minLength(6),
+  phoneNumber: new FormControl('', [Validators.required]),
+  confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6),
     Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]
 )
 } );
