@@ -59,7 +59,7 @@
             </div>
           </ng-template>
         </ngx-file-drop> -->
-        <ngx-file-drop
+        <!-- <ngx-file-drop
         (onFileDrop)="dropped($event)"
         accept="image/*"
         [multiple]="false"
@@ -81,8 +81,36 @@
             </div>
           </div>
         </ng-template>
-      </ngx-file-drop>
-      
+      </ngx-file-drop> -->
+<div class="preview-wrapper" *ngIf="isInViewMode">
+  <img [src]="imagePreview || defaultImage" alt="Preview" class="preview-image">
+</div>
+
+<ngx-file-drop
+  *ngIf="!isInViewMode"
+  (onFileDrop)="dropped($event)"
+  accept="image/*"
+  [multiple]="false"
+  dropZoneClassName="custom-drop-zone"
+  [showBrowseBtn]="false"
+>
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    <div class="upload-box" (click)="openFileSelector()">
+      <i class="fa fa-upload upload-icon" *ngIf="!imagePreview"></i>
+      <p *ngIf="!imagePreview">
+        Drag & Drop or 
+        <span class="choose-text" (click)="openFileSelector(); $event.stopPropagation()">Choose a Item Image</span>
+        to Upload
+      </p>
+
+      <div class="preview-wrapper" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Preview" class="preview-image">
+        <i class="fa fa-times delete-icon" (click)="deleteImage()"></i>
+      </div>
+    </div>
+  </ng-template>
+</ngx-file-drop>
+
       </div>
       <div class="d-flex justify-content-end gap-2 mt-3">
         <button (click)="cancel()" type="button" class="save btn btn-outline-secondary px-4">Cancel

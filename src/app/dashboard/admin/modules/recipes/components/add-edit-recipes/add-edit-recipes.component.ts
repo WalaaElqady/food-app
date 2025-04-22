@@ -69,6 +69,10 @@ export class AddEditRecipesComponent implements OnInit  {
     }
        
    }
+   get isInViewMode(): boolean {
+    return this.isViewMode === 'true';
+  }
+  
   getTags(): void {
     this.helperService.getTags().subscribe({
       next: (res) => {
@@ -147,7 +151,29 @@ export class AddEditRecipesComponent implements OnInit  {
       }
     });
   }
-  getRecipeById(recipeId: string):void{
+  // getRecipeById(recipeId: string):void{
+  //   this.recipesService.getRecipeById(recipeId).subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //       this.recipesForm.patchValue({
+  //         name: res.name,
+  //         description: res.description,
+  //         price: res.price,
+  //         tagId: res.tag ? res.tag.id : null,
+  //         categoriesIds: res.category.map((cat:any)=>cat.id)
+
+  //       })
+  //       if (res.imagePath) {
+  //         this.imagePreview = this.baseUrl + res.imagePath; // Add baseUrl if needed
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching categories:', err);
+  //     }
+  //   });
+  
+  // }
+  getRecipeById(recipeId: string): void {
     this.recipesService.getRecipeById(recipeId).subscribe({
       next: (res) => {
         console.log(res);
@@ -156,19 +182,21 @@ export class AddEditRecipesComponent implements OnInit  {
           description: res.description,
           price: res.price,
           tagId: res.tag ? res.tag.id : null,
-          categoriesIds: res.category.map((cat:any)=>cat.id)
-
-        })
+          categoriesIds: res.category.map((cat: any) => cat.id)
+        });
+  
         if (res.imagePath) {
-          this.imagePreview = this.baseUrl + res.imagePath; // Add baseUrl if needed
+          this.imagePreview = this.baseUrl + res.imagePath;
+        } else {
+          this.imagePreview = this.defaultImage;
         }
       },
       error: (err) => {
-        console.error('Error fetching categories:', err);
+        console.error('Error fetching recipe:', err);
       }
     });
-  
   }
+  
   cancel(): void {
       this.router.navigate(['dashboard/admin/recipes']);
   }

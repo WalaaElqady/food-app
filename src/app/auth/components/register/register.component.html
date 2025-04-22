@@ -42,7 +42,6 @@
                       <ng-container *ngIf="imagePreview">
                         <div class="image-container">
                           <img [src]="imagePreview" alt="Preview" class="img-preview">
-                          <!-- <button (click)="deleteImage()">Delete Image</button> -->
                           <i class="fa fa-close delete-icon" *ngIf="imagePreview" (click)="deleteImage()"></i>
                         </div>
                       </ng-container>
