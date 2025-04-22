@@ -2,3 +2,4 @@ ng build
 href ./
 use Hash = true
 npm i netlify-cli -g
+netlify init
